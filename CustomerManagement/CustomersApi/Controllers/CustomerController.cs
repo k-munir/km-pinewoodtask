@@ -23,7 +23,8 @@ namespace CustomersApi.Controllers
             return Ok(customers);
         }
 
-        [Route("get")]
+
+        [Route("get/{id}")]
         [HttpGet]
         public IActionResult Get(int id)
         {

@@ -58,7 +58,7 @@ namespace CustomerPortal.Controllers
         public IActionResult Edit(int id)
         {
             CustomerViewModel customer = new CustomerViewModel();
-            var request = new RestRequest($"post/{id}");
+            var request = new RestRequest($"get/{id}");
             var response = _client.GetAsync(request);
             if (response.Result.IsSuccessStatusCode)
             {
