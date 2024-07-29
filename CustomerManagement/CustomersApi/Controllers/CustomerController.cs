@@ -72,14 +72,22 @@ namespace CustomersApi.Controllers
             }
         }
 
-        //[Route("delete")]
-        //[HttpDelete]
-        //public IActionResult Delete(int id)
-        //{
-        //    var customer = _context.Customers.Find(id);
-        //    if (customer == null) return NotFound("Customer not found");
-        //    _context.Customers.del
-        //    return Ok(customer);
-        //}
+        [Route("delete/{id}")]
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            try
+            {
+                var customer = _context.Customers.Find(id);
+                if (customer == null) return NotFound("Customer not found");
+                _context.Customers.Remove(customer);
+                _context.SaveChanges();
+                return Ok("Customer removed successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }
