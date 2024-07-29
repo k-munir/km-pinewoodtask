@@ -38,7 +38,8 @@ namespace CustomerPortal.Controllers
             try
             {
                 string data = JsonConvert.SerializeObject(model);
-                var request = new RestRequest(data, Method.Post);
+                var request = new RestRequest("post");
+                request.AddBody(model);
                 var response = _client.PostAsync(request);
                 if (response.Result.IsSuccessStatusCode)
                 {

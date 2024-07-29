@@ -15,10 +15,11 @@
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
                 <select asp-for="Title">
-                    <option name="Mr" value="Mr" />
-                    <option name="Mr" value="Ms" />
-                    <option name="Mr" value="Mrs" />
-                    <option name="Mr" value="Mstr" />
+                    <option value="">Select</option>
+                    <option value="Mr">Mr</option>
+                    <option value="Ms">Ms</option>
+                    <option value="Mrs">Mrs</option>
+                    <option value="Mx">Mx</option>
                 </select>
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
