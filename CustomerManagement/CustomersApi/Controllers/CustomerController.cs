@@ -23,6 +23,15 @@ namespace CustomersApi.Controllers
             return Ok(customers);
         }
 
+        [Route("get")]
+        [HttpGet]
+        public IActionResult Get(int id)
+        {
+            var customer = _context.Customers.Find(id);
+            if (customer == null) return NotFound("Customer not found");
+            return Ok(customer);
+        }
+
         [Route("post")]
         [HttpPost]
         public IActionResult Post(Customer model)
@@ -39,5 +48,37 @@ namespace CustomersApi.Controllers
                 throw;
             }
         }
+
+        [Route("put")]
+        [HttpPut]
+        public IActionResult Put(Customer model)
+        {
+            try
+            {
+                if (model.Id == 0) return BadRequest("Invalid customer data");
+                var customer = _context.Customers.Find(model.Id);
+                if (customer == null) return NotFound("Customer not found");
+                customer.Email = model.Email;
+                customer.FirstName = model.FirstName;
+                customer.LastName = model.LastName;
+                customer.Telephone = model.Telephone;
+                _context.SaveChanges();
+                return Ok("Customer updated successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        //[Route("delete")]
+        //[HttpDelete]
+        //public IActionResult Delete(int id)
+        //{
+        //    var customer = _context.Customers.Find(id);
+        //    if (customer == null) return NotFound("Customer not found");
+        //    _context.Customers.del
+        //    return Ok(customer);
+        //}
     }
 }

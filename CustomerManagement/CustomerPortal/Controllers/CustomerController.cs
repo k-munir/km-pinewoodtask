@@ -53,5 +53,56 @@ namespace CustomerPortal.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            CustomerViewModel customer = new CustomerViewModel();
+            var request = new RestRequest($"post/{id}");
+            var response = _client.GetAsync(request);
+            if (response.Result.IsSuccessStatusCode)
+            {
+                string data = response.Result.Content;
+                customer = JsonConvert.DeserializeObject<CustomerViewModel>(data);
+                return View(customer);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Edit(CustomerViewModel model)
+        {
+            try
+            {
+                string data = JsonConvert.SerializeObject(model);
+                var request = new RestRequest("put");
+                request.AddBody(model);
+                var response = _client.PutAsync(request);
+                if (response.Result.IsSuccessStatusCode)
+                {
+                    TempData["successMessage"] = response.Result.Content;
+                    RedirectToAction("Index");
+                }
+            }
+            catch (Exception ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+            }
+            return View();
+        }
+
+        //[HttpDelete]
+        //public IActionResult Delete(int id)
+        //{
+        //    var request = new RestRequest($"delete/{id}");
+        //    var response = _client.DeleteAsync(request);
+        //    if (response.Result.IsSuccessStatusCode)
+        //    {
+        //        TempData["successMessage"] = response.Result.Content;
+        //        RedirectToAction("Index");
+        //    }
+        //    TempData["errorMessage"] = response.Result.Content;
+        //    RedirectToAction("Read");
+        //}
     }
 }
