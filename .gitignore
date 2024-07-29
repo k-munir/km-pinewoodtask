@@ -4,3 +4,6 @@ CustomerManagement/.vs/CustomerManagement/v17/.suo
 CustomerManagement/.vs/CustomerManagement/v17/DocumentLayout.json
 /CustomerManagement/CustomerPortal/obj
 /CustomerManagement/.vs
+/CustomerManagement/CustomerPortal/bin/Debug
+/CustomerManagement/CustomersApi/bin/Debug
+/CustomerManagement/CustomersApi/obj/Debug
